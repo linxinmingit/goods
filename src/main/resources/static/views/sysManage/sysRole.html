@@ -1,0 +1,82 @@
+<div class="layui-row main-header">
+    <span>角色列表</span>
+</div>
+<div class="layui-row main-content">
+    <div class="main-content-top">
+        <button class="layui-btn" onclick="layui.sysRole.addRole()">+&nbsp;&nbsp;添加角色</button><!-- 添加角色 -->
+    </div>
+    <div class="main-content-form">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" id="roleName" autocomplete="off" placeholder="角色名称" class="layui-input">
+                </div>
+                <div class="layui-col-md1">
+                    <a class="layui-btn layui-btn-sm" onclick="layui.sysRole.initTable()">查询</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="main-content-center">
+        <div id="sysRoleTable" class="layui-table" lay-filter="sysRoleEvent"></div>
+    </div>
+</div>
+
+<script id="roleAuth" type="text/html">
+    <div class="layer-div">
+        <form class="layui-form">
+            <input type="hidden" name="id" value="{{d.id}}">
+            <div class="layui-form-item">
+                <div id="menuTree"></div>
+            </div>
+            <div class="layui-form-item form-btn">
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-md" lay-submit lay-filter="nowSubmit">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<!-- 添加或编辑角色 Start -->
+<script id="addOrUpdateRole" type="text/html">
+    <div class="layer-div">
+        <form id="addOrUpdateRoleForm" class="layui-form" autocomplete="off">
+            <input type="hidden" name="id" value="{{d.id}}">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>角色名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="roleName" placeholder="角色名称" lay-verify="roleName" class="layui-input" value="{{d.roleName}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色编码：</label>
+                <div class="layui-input-block">
+                    <textarea name="roleCode" placeholder="角色编码" class="layui-textarea">{{d.roleCode}}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">排序：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sort" placeholder="排序,如：1" class="layui-input" value="{{d.sort}}" />
+                </div>
+            </div>
+            <div class="layui-form-item form-btn">
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-md" lay-submit lay-filter="addOrUpdateRoleForm">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<!-- 添加或编辑角色 End -->
+<script type="text/javascript">
+    layui.use("sysRole",function(){
+        var sysRole = layui.sysRole;
+        //初始化页面
+        sysRole.initView();
+        //监听事件
+        sysRole.tool();
+    })
+
+</script>
