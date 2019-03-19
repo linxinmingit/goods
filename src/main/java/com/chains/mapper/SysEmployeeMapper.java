@@ -3,6 +3,7 @@ package com.chains.mapper;
 import com.chains.model.SysEmployee;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.chains.model.SysMenu;
+import com.chains.model.SysRole;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -36,4 +37,8 @@ public interface SysEmployeeMapper extends BaseMapper<SysEmployee> {
             "RIGHT JOIN sys_menu sm ON srm.menu_id = sm.id " +
             "WHERE sr.id = #{roleId}")
     List<SysMenu> findMenusByRoleId(String roleId);
+
+    SysRole findById(String id);
+
+    boolean updateStatusById(String id);
 }

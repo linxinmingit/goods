@@ -1,5 +1,6 @@
 package com.chains.controller;
 
+import com.chains.model.SysEmployee;
 import com.chains.vo.SimpleMsgVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -10,6 +11,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -29,11 +32,17 @@ public class LoginController {
      * @return
      */
     @RequestMapping("/login")
-    public Object login(String username, String password, @RequestParam(value = "rememberMe", required = false) boolean rememberMe){
+    public Object login(String username, String password, @RequestParam(value = "rememberMe", required = false) boolean rememberMe, HttpSession session){
         try {
             AuthenticationToken token = new UsernamePasswordToken(username, password, rememberMe);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
+
+            /**
+             * 将登录信息存进session中
+             */
+            SysEmployee sysEmployee=(SysEmployee) subject.getPrincipal();
+            session.setAttribute("user", sysEmployee);
         } catch (UnknownAccountException uae) {
             return SimpleMsgVO.getFail9996();
         } catch (IncorrectCredentialsException ice) {

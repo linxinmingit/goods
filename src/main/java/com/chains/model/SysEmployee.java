@@ -47,7 +47,7 @@ public class SysEmployee extends Model<SysEmployee> {
     /**
      * 用户状态  0 启用  1 失效
      */
-    private Integer status;
+    private Integer status = 0;
 
     /**
      * 创建时间

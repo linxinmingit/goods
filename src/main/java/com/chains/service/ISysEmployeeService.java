@@ -13,5 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-03-15
  */
 public interface ISysEmployeeService extends IService<SysEmployee> {
+    /**
+     * 根据主键ID做逻辑删除
+     * @param id
+     * @return
+     */
+    boolean updateStatusById(String id);
 
 }
