@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chains.mapper.BizBusinessMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chains.model.BizBusiness">
+        <id column="id" property="id" />
+        <result column="business_name" property="businessName" />
+        <result column="mobile" property="mobile" />
+        <result column="province_id" property="provinceId" />
+        <result column="city_id" property="cityId" />
+        <result column="area_id" property="areaId" />
+        <result column="business_address" property="businessAddress" />
+        <result column="link_people" property="linkPeople" />
+        <result column="create_on" property="createOn" />
+        <result column="create_by" property="createBy" />
+        <result column="update_on" property="updateOn" />
+        <result column="update_by" property="updateBy" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!--根据ID主键做逻辑删除-->
+    <update id="updateStatusById" parameterType="com.chains.model.BizBusiness">
+        UPDATE biz_business t SET
+		t.IS_DELETED = 1
+		WHERE t.id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
