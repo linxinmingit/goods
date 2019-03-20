@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chains.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chains.model.SysUser">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="login_name" property="loginName" />
+        <result column="password" property="password" />
+        <result column="mobile" property="mobile" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="age" property="age" />
+        <result column="user_img" property="userImg" />
+        <result column="growth" property="growth" />
+        <result column="level" property="level" />
+        <result column="user_model_url" property="userModelUrl" />
+        <result column="terminal_id" property="terminalId" />
+        <result column="access_id" property="accessId" />
+        <result column="create_on" property="createOn" />
+        <result column="create_by" property="createBy" />
+        <result column="update_on" property="updateOn" />
+        <result column="update_by" property="updateBy" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+
+    <!--根据ID主键做逻辑删除-->
+    <update id="updateStatusById" parameterType="com.chains.model.SysUser">
+        UPDATE sys_user t SET
+		t.IS_DELETED = 1
+		WHERE t.id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>
