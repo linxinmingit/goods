@@ -1,0 +1,40 @@
+## 开发环境
+
+#数据源配置
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/goods?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: rootroot
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 1
+      min-idle: 1
+      max-active: 2
+      time-between-eviction-runs-millis: 300
+      min-evictable-idle-time-millis: 300
+      validation-query: SELECT 'ZTM' FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+#mybatis-plus 配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.chains.model
+  global-config:
+    db-config:
+      id-type: uuid
+      field-strategy: not_empty
+      table-underline: true
+
+
+#日志
+logging:
+  config: classpath:log4j2.xml
+
+# 服务器上传图片路径
+upload:
+  uploadConfig:
+    upload-url: E://upload/
+    web-url: http://localhost:8082/gla/static/probimg/

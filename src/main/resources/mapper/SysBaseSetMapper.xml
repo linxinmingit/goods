@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chains.mapper.SysBaseSetMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chains.model.SysBaseSet">
+        <id column="id" property="id" />
+        <result column="hot_search" property="hotSearch" />
+        <result column="appraise_examine" property="appraiseExamine" />
+        <result column="default_img" property="defaultImg" />
+        <result column="user_agreement" property="userAgreement" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="create_on" property="createOn" />
+        <result column="create_by" property="createBy" />
+        <result column="update_on" property="updateOn" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+
+
+    <!--根据ID主键做逻辑删除-->
+    <update id="updateStatusById" parameterType="com.chains.model.SysBaseSet">
+        UPDATE sys_base_set t SET
+		t.IS_DELETED = 1
+		WHERE t.id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,70 @@
+<div class="layui-row main-header">
+    <span>基础设置列表</span>
+</div>
+<div class="layui-row main-content">
+    <div class="main-content-top">
+        <button class="layui-btn" onclick="layui.sysBaseSet.addBaseSet()">+&nbsp;&nbsp;添加员工</button>
+    </div>
+    <div class="main-content-form">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" id="hotSearch" name="hotSearch" autocomplete="off" placeholder="热门关键字" class="layui-input" />
+                </div>
+                <div class="layui-col-md1">
+                    <a class="layui-btn layui-btn-sm" onclick="layui.sysBaseSet.initTable()">查询</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="main-content-center">
+        <div id="sysBaseSetTable" class="layui-table" lay-filter="sysBaseSetEvent"></div>
+    </div>
+</div>
+
+<script id="addOrUpdateBaseSet" type="text/html">
+    <div class="layer-div">
+        <form id="addOrUpdateBaseSetForm" class="layui-form" autocomplete="off">
+            <input type="hidden" name="id" value="{{d.id}}">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>搜索关键字: </label>
+                <div class="layui-input-block">
+                    <input type="text" name="hotSearch" placeholder="热门搜索关键字" lay-verify="hotSearch" class="layui-input" value="{{d.hotSearch}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">评价是否审批:</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="appraiseExamine" value="0" title="是" checked="">
+                    <input type="radio" name="appraiseExamine" value="1" title="否">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <!--<div class="layui-upload">-->
+                    <!--<button type="button" class="layui-btn" id="test1">默认图片</button>-->
+                    <!--<div class="layui-upload-list">-->
+                        <!--<img class="layui-upload-img" id="demo1">-->
+                        <!--<p id="demoText"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+            <!--<div class="layui-upload">-->
+                <!--<button type="button" class="layui-btn" id="test3" name="userAgreement"><i class="layui-icon"></i>用户协议</button>-->
+            <!--</div>-->
+            <div class="layui-form-item form-btn">
+                <div class="layui-inline">
+                    <button id="submits" class="layui-btn layui-btn-md" lay-submit lay-filter="addOrUpdateBaseSetForm">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/javascript">
+    layui.use("sysBaseSet",function(){
+        var sysBaseSet = layui.sysBaseSet;
+        //初始化页面
+        sysBaseSet.initView();
+        //监听事件
+        sysBaseSet.tool();
+    });
+</script>
