@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
+Source Server         : localhost
 Source Server Version : 80013
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : goods
 
 Target Server Type    : MYSQL
 Target Server Version : 80013
 File Encoding         : 65001
 
-Date: 2019-03-19 11:11:19
+Date: 2019-03-20 17:47:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,6 +71,9 @@ CREATE TABLE `biz_business` (
   `id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `business_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商家名称',
   `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商家电话',
+  `province_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '省id',
+  `city_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '城市id',
+  `area_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '区域id',
   `business_address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商家地址',
   `link_people` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '联系人',
   `create_on` datetime DEFAULT NULL COMMENT '创建时间',
@@ -84,8 +87,11 @@ CREATE TABLE `biz_business` (
 -- ----------------------------
 -- Records of biz_business
 -- ----------------------------
-INSERT INTO `biz_business` VALUES ('081d4df3462b11e99da72c56dcd4f98f', '尼康眼镜', '12345678912', '重庆市渝北区', '张无忌', '2019-03-14 15:30:22', null, '2019-03-14 15:30:22', null, '0');
-INSERT INTO `biz_business` VALUES ('3b794236462b11e99da72c56dcd4f98f', '宝丽来眼镜', '23456789123', '广州深圳市南山区', '金毛狮王', '2019-03-14 15:31:48', null, '2019-03-14 15:31:48', null, '0');
+INSERT INTO `biz_business` VALUES ('0507a2ea077649a04d59d37b43954cd1', 'aaa', '18245757142', null, null, null, null, 'ffff', '2019-03-20 17:34:08', 'admin', null, null, '0');
+INSERT INTO `biz_business` VALUES ('081d4df3462b11e99da72c56dcd4f98f', '尼康眼镜', '12345678912', null, null, null, '重庆市渝北区', '张无忌', '2019-03-14 15:30:22', null, '2019-03-14 15:30:22', null, '0');
+INSERT INTO `biz_business` VALUES ('3b794236462b11e99da72c56dcd4f98f', '宝丽来眼镜', '23456789123', null, null, null, '广州深圳市南山区', '金毛狮王', '2019-03-14 15:31:48', null, '2019-03-14 15:31:48', null, '0');
+INSERT INTO `biz_business` VALUES ('8d731c28dca0f5b419f95784e1f84ff0', '时尚芭莎时尚周刊', '15236411715', null, null, null, null, '苏芒', '2019-03-20 16:47:24', 'admin', '2019-03-20 16:50:27', 'admin', '0');
+INSERT INTO `biz_business` VALUES ('da5f76eb2229d785afefba2c30844836', '一汽大众汽车', '19236545218', null, null, null, null, '刘毅', '2019-03-20 16:49:34', 'admin', '2019-03-20 16:50:35', 'admin', '1');
 
 -- ----------------------------
 -- Table structure for biz_comment
@@ -3528,6 +3534,10 @@ CREATE TABLE `sys_base_set` (
 -- ----------------------------
 -- Records of sys_base_set
 -- ----------------------------
+INSERT INTO `sys_base_set` VALUES ('6d2070e1e32a11e8b5e72c56dc9c49c2', 'aa', '0', 'http://localhost:8082/gla/static/probimg/20190318/1552890162525.jpg', 'http://localhost:8082/gla/static/probimg/20190318/1552878270412.pdf', '1', '2019-03-19 18:14:32', 'admin', null, null);
+INSERT INTO `sys_base_set` VALUES ('95abd333ce4d65154d17a77e816bac2d', 'wy', '0', null, null, '0', '2019-03-20 11:14:44', null, null, 'admin');
+INSERT INTO `sys_base_set` VALUES ('e3ecaa3dc7a4332dfc0f62b5a567f929', '000000', '1', null, null, '0', '2019-03-20 12:23:36', null, null, 'admin');
+INSERT INTO `sys_base_set` VALUES ('undefined', 'uuuu', '1', null, null, '0', null, 'admin', '2019-03-20 10:50:30', null);
 
 -- ----------------------------
 -- Table structure for sys_blacklist
@@ -3952,7 +3962,11 @@ CREATE TABLE `sys_employee` (
 -- ----------------------------
 -- Records of sys_employee
 -- ----------------------------
+INSERT INTO `sys_employee` VALUES ('00cd7bd40857e7185a4c9eca886ea5f5', 'aa', 'aa', 'aa', '13652321719', '1', '2019-03-20 15:00:53', 'admin', null, null);
+INSERT INTO `sys_employee` VALUES ('477085e84bc55fb22b7fad32cb6da8c0', '薛明', 'xueming', '5523', '15236523217', '0', '2019-03-20 09:40:05', 'admin', null, null);
 INSERT INTO `sys_employee` VALUES ('6d2070e1e32a11e8b5e72c56dc9c49c2', '周纯', 'admin', '88212f91e2e9cf36981a91b6c518af5c', '18682450122', '0', '2019-03-12 14:29:08', '周纯', '2019-03-12 14:29:10', '周纯');
+INSERT INTO `sys_employee` VALUES ('b15594ca29994d16aac94fb3c61cfaff', '王涛', 'tao', '88212f91e2e9cf36981a91b6c518af5c', '13652981415', '0', '2019-03-19 16:32:27', 'admin', null, null);
+INSERT INTO `sys_employee` VALUES ('ceb40f3a233ef97c3824a5fcaa556c31', '壹佰', 'yiibai', '8080', '19963231574', '1', '2019-03-19 17:04:25', 'admin', null, null);
 
 -- ----------------------------
 -- Table structure for sys_employee_role
@@ -4462,7 +4476,7 @@ INSERT INTO `sys_menu` VALUES ('6', '代理商管理', 'AGENT', '0', '1', null, 
 INSERT INTO `sys_menu` VALUES ('61', '代理商管理', 'AGENT_01', '6', '2', '#views/sysManage/bizAgent.html', null, '61');
 INSERT INTO `sys_menu` VALUES ('62', '支付设置', 'OTHOR_CHANNEL', '42', '2', '#views/sysManage/sysPaymentChannel.html', null, '62');
 INSERT INTO `sys_menu` VALUES ('63', '物流公司设置', 'OTHER_LOGISTICS', '42', '2', '#views/sysManage/sysLogistics.html', null, '63');
-INSERT INTO `sys_menu` VALUES ('64', '基本设置', 'OTHER_BASE_SET', '42', '2', '#views/sysManage/sysBaseSet.html', null, '64');
+INSERT INTO `sys_menu` VALUES ('64', '基本设置', 'OTHER_BASE_SET', '42', '2', '#views/sysSetup/sysBaseSetup.html', null, '64');
 INSERT INTO `sys_menu` VALUES ('65', '消息提醒设置', 'OTHER_MESSAGE_NOTIFY', '42', '2', '#views/sysManage/sysMessageNotify.html', null, '65');
 INSERT INTO `sys_menu` VALUES ('7', '库存管理', 'STOCK', '0', '1', null, null, '7');
 INSERT INTO `sys_menu` VALUES ('71', '库存管理', 'STOCK_01', '7', '2', '#views/sysManage/bizStock.html', null, '71');
@@ -4659,9 +4673,11 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('0b09d63ff3b011e8b76e2c56dc9c49c2', '陈二', 'chener', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:07', '', '2019-03-11 18:18:49', null, null);
-INSERT INTO `sys_user` VALUES ('73f8bb40f38f11e8b76e2c56dc9c49c2', '张三', 'zhangsan', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:09', '', '2019-03-11 18:18:52', null, null);
-INSERT INTO `sys_user` VALUES ('8c6b9468f38f11e8b76e2c56dc9c49c2', '李四', 'lisi', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:11', '', '2019-03-11 18:18:54', null, null);
-INSERT INTO `sys_user` VALUES ('aff518b1f3b911e8b76e2c56dc9c49c2', '王五', 'wangwu', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:14', '', '2019-03-11 18:18:56', null, null);
-INSERT INTO `sys_user` VALUES ('be82ba8bf3b911e8b76e2c56dc9c49c2', '唐六', 'tangliu', '123', '18682450122', '123@163.com', '0', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:16', '', '2019-03-11 18:18:58', null, null);
-INSERT INTO `sys_user` VALUES ('f4310cbff3ac11e8b76e2c56dc9c49c2', '朱七', 'zhuqi', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:18', '', '2019-03-11 18:19:00', null, null);
+INSERT INTO `sys_user` VALUES ('05a2c35a8284a51d2c7d0a0dd83d0767', '刘毅', 'liuyi', '5320', '13652321719', '13652321719@qq.com', '1', '30', null, null, null, null, null, null, '2019-03-20 15:07:39', 'admin', null, null, null);
+INSERT INTO `sys_user` VALUES ('0b09d63ff3b011e8b76e2c56dc9c49c2', '陈二', 'chener', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:07', '', '2019-03-11 18:18:49', null, '1');
+INSERT INTO `sys_user` VALUES ('73f8bb40f38f11e8b76e2c56dc9c49c2', '张三', 'zhangsan', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:09', '', '2019-03-11 18:18:52', null, '0');
+INSERT INTO `sys_user` VALUES ('7c0a59a2a8ac9530f6435b605f076c16', '陆无双', 'luwusuang', '5247', '18244856317', 'lws@qq.com', '0', '25', null, null, null, null, null, null, '2019-03-20 15:18:48', 'admin', null, null, '1');
+INSERT INTO `sys_user` VALUES ('8c6b9468f38f11e8b76e2c56dc9c49c2', '李四', 'lisi', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:11', '', '2019-03-11 18:18:54', null, '0');
+INSERT INTO `sys_user` VALUES ('aff518b1f3b911e8b76e2c56dc9c49c2', '王五', 'wangwu', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:14', '', '2019-03-11 18:18:56', null, '0');
+INSERT INTO `sys_user` VALUES ('be82ba8bf3b911e8b76e2c56dc9c49c2', '唐六', 'tangliu', '123', '18682450122', '123@163.com', '0', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:16', '', '2019-03-11 18:18:58', null, '0');
+INSERT INTO `sys_user` VALUES ('f4310cbff3ac11e8b76e2c56dc9c49c2', '朱七', 'zhuqi', '123', '18682450122', '123@163.com', '1', '18', '', '1000', '1', '', '', '', '2019-03-11 18:19:18', '', '2019-03-11 18:19:00', null, '0');
