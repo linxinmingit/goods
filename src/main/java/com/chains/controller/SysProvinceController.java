@@ -4,6 +4,7 @@ package com.chains.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.chains.model.SysCity;
 import com.chains.model.SysProvince;
 import com.chains.model.SysRole;
 import com.chains.service.ISysProvinceService;
@@ -41,7 +42,28 @@ public class SysProvinceController {
     public Object queryList(){
         try {
             List<SysProvince> sysProvinceList = iSysProvinceService.list();
-            return TableMsgVO.getOk(sysProvinceList.size(),sysProvinceList);
+            return SimpleMsgVO.getOk(sysProvinceList);
+        }catch (Exception e){
+            e.printStackTrace();
+            return SimpleMsgVO.getFail9997();
+        }
+    }
+
+    /**
+     * 根据省id 查询具体省数据
+     * @param
+     * @return
+     */
+    @RequestMapping("/queryById")
+    public Object queryById(String id)
+    {
+        try {
+            SysProvince sysProvince = new SysProvince();
+            sysProvince.setId(id);
+            QueryWrapper<SysProvince> wrapper = new QueryWrapper<>();
+            wrapper.eq("id", id);
+            List<SysProvince> sysCityList = iSysProvinceService.list(wrapper);
+            return SimpleMsgVO.getOk(sysCityList);
         }catch (Exception e){
             e.printStackTrace();
             return SimpleMsgVO.getFail9997();

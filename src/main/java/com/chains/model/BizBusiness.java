@@ -1,6 +1,7 @@
 package com.chains.model;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -80,5 +81,4 @@ public class BizBusiness extends Model<BizBusiness> {
      * 删除状态  0 可用  1已删除
      */
     private Integer isDeleted;
-
 }

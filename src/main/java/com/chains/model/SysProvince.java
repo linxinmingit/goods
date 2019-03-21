@@ -1,6 +1,8 @@
 package com.chains.model;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,7 @@ import java.io.Serializable;
  * @author chains
  * @since 2019-03-20
  */
+@Data
 public class SysProvince extends Model<SysProvince> {
 
     private static final long serialVersionUID = 1L;
@@ -33,53 +36,6 @@ public class SysProvince extends Model<SysProvince> {
     /**
      * 排序
      */
-    private Integer order;
+    private Integer sort;
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getProvinceName() {
-        return provinceName;
-    }
-
-    public void setProvinceName(String provinceName) {
-        this.provinceName = provinceName;
-    }
-
-    public String getProvinceCode() {
-        return provinceCode;
-    }
-
-    public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "SysProvince{" +
-        "id=" + id +
-        ", provinceName=" + provinceName +
-        ", provinceCode=" + provinceCode +
-        ", order=" + order +
-        "}";
-    }
 }

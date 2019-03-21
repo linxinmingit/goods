@@ -1,0 +1,70 @@
+<div class="layui-row main-header">
+    <span>支付渠道列表</span>
+</div>
+<div class="layui-row main-content">
+    <div class="main-content-top">
+        <button class="layui-btn" onclick="layui.sysPaymentChannel.addPaymentChannel()">+&nbsp;&nbsp;添加员工</button>
+    </div>
+    <div class="main-content-form">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" id="channelName" name="channelName" autocomplete="off" placeholder="渠道名称" class="layui-input" />
+                </div>
+                <div class="layui-col-md1">
+                    <a class="layui-btn layui-btn-sm" onclick="layui.sysPaymentChannel.initTable()">查询</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="main-content-center">
+        <div id="sysPaymentChannelTable" class="layui-table" lay-filter="sysPaymentChannelEvent"></div>
+    </div>
+</div>
+
+<script id="addOrUpdatePaymentChannel" type="text/html">
+    <div class="layer-div">
+        <form id="addOrUpdatePaymentChannelForm" class="layui-form" autocomplete="off">
+            <input type="hidden" name="id" value="{{d.id}}">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>渠道名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="channelName" placeholder="渠道名称" lay-verify="channelName" class="layui-input" value="{{d.channelName}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>渠道编号：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="channelCode" placeholder="渠道编号" lay-verify="channelCode" class="layui-input" value="{{d.channelCode}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">排序：</label>
+                <div class="layui-input-block">
+                    <input type="number" name="order" placeholder="排序" lay-verify="order" class="layui-input" value="{{d.order}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否开启:</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="isOpen" value="0" title="是" checked="">
+                    <input type="radio" name="isOpen" value="1" title="否">
+                </div>
+            </div>
+            <div class="layui-form-item form-btn">
+                <div class="layui-inline">
+                    <button id="submits" class="layui-btn layui-btn-md" lay-submit lay-filter="addOrUpdatePaymentChannelForm">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/javascript">
+    layui.use("sysPaymentChannel",function(){
+        var sysPaymentChannel = layui.sysPaymentChannel;
+        //初始化页面
+        sysPaymentChannel.initView();
+        //监听事件
+        sysPaymentChannel.tool();
+    })
+</script>

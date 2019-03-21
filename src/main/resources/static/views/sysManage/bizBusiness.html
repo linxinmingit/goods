@@ -44,34 +44,21 @@
                     <input type="tel" name="mobile" placeholder="联系电话" lay-verify="mobile" class="layui-input" value="{{d.mobile}}" />
                 </div>
             </div>
-
-            <!--<div class="layui-form-item">-->
-                <!--<label class="layui-form-label">联系地址</label>-->
-                <!--<div class="layui-input-inline">-->
-                    <!--<select name="quiz1" lay-filter="businessAddress">-->
-                        <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-                        <!--<c:forEach items="${listhos}" var="item">-->
-                            <!--<option value="${item.id }" >${item.hospitalName}</option>-->
-                        <!--</c:forEach>-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="layui-form-item">-->
-            <div class="layui-select" lay-verify="selects" >
+            <div class="layui-form-item">
                 <label class="layui-form-label">联系地址:</label>
                 <div class="layui-input-inline">
-                    <select lay-verify="provinceId" name="provinceId" id="provinceId">
-                        <option value="">请选择省</option>
+                    <select lay-verify="provinceId" name="provinceId" id="provinceId" lay-filter="provinceId" class="layui-select">
+                        <option value="{{d.provinceId}}"></option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select lay-verify="cityId" name="cityId" id="cityId">
-                        <option value="">请选择市</option>
+                    <select lay-verify="cityId" name="cityId" id="cityId" lay-filter="cityId" class="layui-select">
+                        <option value="{{d.cityId}}"></option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select lay-verify="areaId" name="areaId" id="areaId">
-                        <option value="">请选择县/区</option>
+                    <select lay-verify="areaId" name="areaId" id="areaId" class="layui-select">
+                        <option value="{{d.areaId}}"></option>
                     </select>
                 </div>
             </div>

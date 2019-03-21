@@ -1,6 +1,7 @@
 package com.chains.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chains.model.SysArea;
 import com.chains.model.SysCity;
 import com.chains.service.ISysAreaService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 
 /**
  * <p>
@@ -34,10 +36,18 @@ public class SysAreaController {
      * @return
      */
     @RequestMapping("/query")
-    public Object queryList(){
+    public Object queryList(String cityId){
         try {
-            List<SysArea> sysAreaList = iSysAreaService.list();
-            return TableMsgVO.getOk(sysAreaList.size(),sysAreaList);
+//            List<SysArea> sysAreaList = iSysAreaService.list();
+//            return SimpleMsgVO.getOk(sysAreaList);
+
+            SysArea sysArea = new SysArea();
+            sysArea.setCityId(cityId);
+            QueryWrapper<SysArea> wrapper = new QueryWrapper<>();
+            wrapper.eq("city_id", cityId);
+            List<SysArea> sysAreaList = iSysAreaService.list(wrapper);
+            return  SimpleMsgVO.getOk(sysAreaList);
+
         }catch (Exception e){
             e.printStackTrace();
             return SimpleMsgVO.getFail9997();

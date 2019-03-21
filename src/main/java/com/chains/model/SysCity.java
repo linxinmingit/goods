@@ -1,6 +1,8 @@
 package com.chains.model;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,7 @@ import java.io.Serializable;
  * @author chains
  * @since 2019-03-20
  */
+@Data
 public class SysCity extends Model<SysCity> {
 
     private static final long serialVersionUID = 1L;
@@ -38,62 +41,8 @@ public class SysCity extends Model<SysCity> {
     /**
      * 排序
      */
-    private Integer order;
+    private Integer sort;
 
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public String getCityCode() {
-        return cityCode;
-    }
-
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
-
-    public String getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(String provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "SysCity{" +
-        "id=" + id +
-        ", cityName=" + cityName +
-        ", cityCode=" + cityCode +
-        ", provinceId=" + provinceId +
-        ", order=" + order +
-        "}";
-    }
 }

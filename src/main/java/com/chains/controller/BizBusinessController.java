@@ -4,9 +4,11 @@ package com.chains.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.chains.model.BizBusiness;
-import com.chains.model.SysEmployee;
+import com.chains.model.*;
 import com.chains.service.IBizBusinessService;
+import com.chains.service.ISysAreaService;
+import com.chains.service.ISysCityService;
+import com.chains.service.ISysProvinceService;
 import com.chains.vo.SimpleMsgVO;
 import com.chains.vo.TableMsgVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,15 @@ public class BizBusinessController {
 
     @Autowired
     private IBizBusinessService iBizBusinessService;
+
+    @Autowired
+    private ISysProvinceService iSysProvinceService;
+
+    @Autowired
+    private ISysCityService iSysCityService;
+
+    @Autowired
+    private ISysAreaService iSysAreaService;
 
     /**
      * 分页查询数据
@@ -79,6 +90,24 @@ public class BizBusinessController {
                  */
                 bizBusiness.setIsDeleted(0);
             }
+            String provinceName = "";
+            if(null != bizBusiness.getProvinceId() && !"".equals(bizBusiness.getProvinceId())) {
+                SysProvince sysProvince = iSysProvinceService.getById(bizBusiness.getProvinceId());
+                provinceName = sysProvince.getProvinceName().trim();
+            }
+            String cityName = "";
+            if(null != bizBusiness.getCityId() && !"".equals(bizBusiness.getCityId())) {
+                SysCity sysCity = iSysCityService.getById(bizBusiness.getCityId());
+                if(!"市".equals(sysCity.getCityName()) && !"县".equals(sysCity.getCityName()) && !"市辖区".equals(sysCity.getCityName())) {
+                    cityName = sysCity.getCityName().trim();
+                }
+            }
+            String areaName = "";
+            if(null != bizBusiness.getAreaId() && !"".equals(bizBusiness.getAreaId())) {
+                SysArea sysArea = iSysAreaService.getById(bizBusiness.getAreaId());
+                areaName = sysArea.getAreaName().trim();
+            }
+            bizBusiness.setBusinessAddress(provinceName + cityName + areaName);
 
             return SimpleMsgVO.getOk(iBizBusinessService.saveOrUpdate(bizBusiness));
         }catch (Exception e){

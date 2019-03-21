@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chains.mapper.SysPaymentChannelMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chains.model.SysPaymentChannel">
+        <id column="id" property="id" />
+        <result column="channel_name" property="channelName" />
+        <result column="channel_code" property="channelCode" />
+        <result column="order" property="order" />
+        <result column="is_open" property="isOpen" />
+        <result column="create_on" property="createOn" />
+        <result column="create_by" property="createBy" />
+        <result column="update_on" property="updateOn" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+
+    <!--根据ID主键做逻辑删除-->
+    <update id="updateStatusById" parameterType="com.chains.model.SysPaymentChannel">
+        UPDATE sys_payment_channel t SET
+		t.is_open = 1
+		WHERE t.id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

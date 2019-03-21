@@ -4,7 +4,7 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
     var $jq = layui.jquery;
     var layer = layui.layer;
     var table = layui.table;
-    // var select = layer.select();
+    var select = layer.select;
     var laytpl = layui.laytpl;
 
     var obj = {
@@ -13,6 +13,34 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
          */
         initView : function(){
             this.initTable();
+        }
+        /**
+         * 初始化下拉框
+         */
+        ,initOption : function (provinceId) {
+            debugger;
+            $jq.post("/gla/sysProvince/query", "", function (data) {
+                var tmp = '<option value="">--请选择省--</option>';
+                var d = data.data;
+                for ( var i in d ) {
+                    tmp += '<option value="' + d [i].id +  '">' + d [i].provinceName + '</option>';
+                }
+                $jq("#provinceId").html(tmp);
+                if(provinceId){
+                    $jq("#provinceId").val(provinceId);
+                }
+                form.render();
+            })
+        }
+        ,selectOption: function (data) {
+            $jq.post("/gla/sysProvince/queryById", {"id":data.value}, function (data) {
+                var d = data.data;
+                for ( var i in d ) {
+                    tmp += '<option value="' + d [i].id +  '">' + d [i].provinceName + '</option>';
+                }
+                $jq("#provinceId").html(tmp);
+                form.render();
+            })
         }
         /**
          * 初始化表格
@@ -61,9 +89,6 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
         }
 
         ,addBusiness : function () {
-            var provinceid = {
-
-            }
             var addBusiness = {
                 "id": "",
                 "businessName": "",
@@ -72,7 +97,8 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
                 "cityId": "",
                 "areaId": "",
                 "mobile": "",
-                "title":"添加商家信息"
+                "title":"添加商家信息",
+                "type":"0"
             };
             layui.bizBusiness.addOrUpdateBusinessForm(addBusiness);
         }
@@ -84,10 +110,18 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
             var htmlStr = laytpl(html).render(business);
             layer.open({
                 type:1,
-                area:'900px',
+                area:["900px","500px"],
                 title:business.title,
                 content:htmlStr
             });
+            //初始化下拉框
+            layui.bizBusiness.initOption(business.provinceId);
+            if(business.type == 1){
+                layui.bizBusiness.initCityOption(business.provinceId,business.cityId);
+                layui.bizBusiness.initAreaOption(business.cityId,business.areaId);
+            }
+
+
             form.render();
         }
         /**
@@ -100,6 +134,7 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
                 //编辑
                 if(obj.event == "edit"){
                     data.title = "编辑员工";
+                    data.type = "1";
                     layui.bizBusiness.addOrUpdateBusinessForm(data);
                 }
                 //删除
@@ -122,6 +157,7 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
                     })
                 }
             });
+
             //表单验证
             form.verify({
                 businessName : function (value) {
@@ -151,57 +187,54 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
                 //防止表单提交
                 return false;
             });
-           //  //刷新
-           //  form.render('select');
-           //
-           //  //省下拉选事件,获取市下拉选
-           // form.on('select(provinceId)', function(data) {
-           //      var hosid = data.value;
-           //      $.ajax({
-           //          type : "post",
-           //          url : "gla/sysProvince/query",
-           //          data : {hosid:hosid},
-           //          dataType : "json",
-           //          success : function(d) {
-           //              var tmp = '<option value="">--请选择--</option>';
-           //
-           //              $("#areaId").html(tmp);
-           //              for ( var i in d) {
-           //                  tmp += '<option value="' + d[i].id +  '">' + d[i].areaName + '</option>';
-           //              }
-           //              $("#cityId").html(tmp);
-           //              form.render();
-           //          },
-           //          error:function(){
-           //              layer.alert('请求失败，稍后再试', {icon: 5});
-           //          }
-           //
-           //      });
-           //  });
-           //
-           //
-           // form.on('select(cityId)',function(data){
-           //      var division1id = data.value;
-           //      $.ajax({
-           //          type : "post",
-           //          url : "gla/sysCity/query",
-           //          data : {division1id:division1id},
-           //          dataType : "json",
-           //          success : function(d) {
-           //              var tmp = '<option value="">--请选择--</option>';
-           //              for ( var i in d) {
-           //                  tmp += '<option value="' + d[i].id +  '">' + d[i].cityName + '</option>';
-           //              }
-           //              $("#areaId").html(tmp);
-           //              form.render();
-           //          },
-           //          error:function(){
-           //              layer.alert('请求失败，稍后再试', {icon: 5});
-           //          }
-           //
-           //      });
-           //  });
+            //刷新
+            // form.render('select');
 
+            // 省下拉选事件,获取市下拉选
+           form.on('select(provinceId)', function(data) {
+               console.log(data.value);
+               layui.bizBusiness.initCityOption(data.value,null);
+            });
+
+           form.on('select(cityId)',function(data){
+               layui.bizBusiness.initAreaOption(data.value,null);
+            });
+
+        }
+        /**
+         * 初始化城市
+         */
+        ,initCityOption : function (provinceId, cityId) {
+            $jq.post("/gla/sysCity/query", {"provinceId":provinceId}, function (data) {
+                var tmp = '<option value="">--请选择市--</option>';
+                var d = data.data;
+                for ( var i in d) {
+                    tmp += '<option value="' + d[i].id +  '">' + d[i].cityName + '</option>';
+                }
+                $jq("#cityId").html(tmp);
+                if(cityId){
+                    $jq("#cityId").val(cityId);
+                }
+                form.render();
+            })
+        }
+        /**
+         * 初始化区域
+         */
+        ,initAreaOption : function (cityId, areaId) {
+            $jq.post("/gla/sysArea/query", {"cityId":cityId}, function (data) {
+                console.log(data);
+                var d = data.data;
+                var tmp = '<option value="">--请选择县或区--</option>';
+                for ( var i in data.data) {
+                    tmp += '<option value="' + d[i].id +  '">' + d[i].areaName + '</option>';
+                }
+                $jq("#areaId").html(tmp);
+                if(areaId){
+                    $jq("#areaId").val(areaId);
+                }
+                form.render();
+            })
         }
 
     }

@@ -1,8 +1,10 @@
 package com.chains.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chains.model.SysCity;
 import com.chains.model.SysProvince;
+import com.chains.model.SysRoleMenu;
 import com.chains.service.ISysCityService;
 import com.chains.vo.SimpleMsgVO;
 import com.chains.vo.TableMsgVO;
@@ -34,10 +36,14 @@ public class SysCityController {
      * @return
      */
     @RequestMapping("/query")
-    public Object queryList(){
+    public Object queryList(String provinceId){
         try {
-            List<SysCity> sysCityList = iSysCityService.list();
-            return TableMsgVO.getOk(sysCityList.size(),sysCityList);
+            SysCity sysCity = new SysCity();
+            sysCity.setProvinceId(provinceId);
+            QueryWrapper<SysCity> wrapper = new QueryWrapper<>();
+            wrapper.eq("province_id", provinceId);
+            List<SysCity> sysCityList = iSysCityService.list(wrapper);
+            return SimpleMsgVO.getOk(sysCityList);
         }catch (Exception e){
             e.printStackTrace();
             return SimpleMsgVO.getFail9997();

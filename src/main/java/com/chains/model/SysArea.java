@@ -1,6 +1,8 @@
 package com.chains.model;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,7 @@ import java.io.Serializable;
  * @author chains
  * @since 2019-03-20
  */
+@Data
 public class SysArea extends Model<SysArea> {
 
     private static final long serialVersionUID = 1L;
@@ -38,62 +41,8 @@ public class SysArea extends Model<SysArea> {
     /**
      * 排序
      */
-    private Integer order;
+    private Integer sort;
 
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getAreaName() {
-        return areaName;
-    }
-
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
-    }
-
-    public String getAreaCode() {
-        return areaCode;
-    }
-
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
-    }
-
-    public String getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(String cityId) {
-        this.cityId = cityId;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "SysArea{" +
-        "id=" + id +
-        ", areaName=" + areaName +
-        ", areaCode=" + areaCode +
-        ", cityId=" + cityId +
-        ", order=" + order +
-        "}";
-    }
 }
