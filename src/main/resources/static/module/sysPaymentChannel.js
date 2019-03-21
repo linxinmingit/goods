@@ -32,7 +32,7 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
                     {field: 'xu', title: 'ID', type: 'numbers', width: 80}
                     ,{field: 'channelName', title: '渠道名称'}
                     ,{field: 'channelCode', title: '渠道编号'}
-                    ,{field: 'order', title: '排序'}
+                    ,{field: 'sort', title: '排序'}
                     ,{
                         title: '是否开启', align: "center", templet: function (d) {
                             if (d.isOpen == 0) {
@@ -63,7 +63,7 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
                 "id": "",
                 "channelName": "",
                 "channelCode": "",
-                "order": "",
+                "sort": "",
                 "isOpen": "",
                 "title":"添加员工"
             };
@@ -73,7 +73,7 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
          * 添加或编辑弹出框
          */
         ,addOrUpdatePaymentChannel : function (pay) {
-            var html = addPaymentChannel.innerHTML;
+            var html = addOrUpdatePaymentChannel.innerHTML;
             var htmlStr = laytpl(html).render(pay);
             layer.open({
                 type:1,
@@ -93,7 +93,7 @@ layui.define(["jquery","form","layer","table","laytpl"], function(exports){
                 //编辑
                 if(obj.event == "edit"){
                     data.title = "编辑员工";
-                    layui.sysPaymentChannel.addOrUpdateEmployee(data);
+                    layui.sysPaymentChannel.addOrUpdatePaymentChannel(data);
                 }
                 //删除
                 if(obj.event == "del"){
