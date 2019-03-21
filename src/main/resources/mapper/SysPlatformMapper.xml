@@ -18,5 +18,10 @@
         <result column="update_on" property="updateOn" />
         <result column="update_by" property="updateBy" />
     </resultMap>
+    <update id="updateStatusById" parameterType="com.chains.model.SysPlatform">
+        UPDATE sys_platform t SET
+		t.IS_DELETED = 1
+		WHERE t.id = #{id,jdbcType=VARCHAR}
+    </update>
 
 </mapper>

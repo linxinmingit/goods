@@ -1,10 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="layui-row main-header">
+    <span>平台信息列表</span>
+</div>
+<div class="layui-row main-content">
+    <div class="main-content-top">
+        <button class="layui-btn" onclick="layui.sysPlatform.addPlatform()">+&nbsp;&nbsp;添加平台</button>
+    </div>
+    <div class="main-content-form">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" id="companyName" name="companyName" autocomplete="off" placeholder="公司名称" class="layui-input" />
+                </div>
+                <div class="layui-col-md1">
+                    <a class="layui-btn layui-btn-sm" onclick="layui.sysPlatform.initTable()">查询</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="main-content-center">
+        <div id="sysPlatformTable" class="layui-table" lay-filter="sysPlatformEvent"></div>
+    </div>
+</div>
 
-</body>
-</html>
+<script id="addOrUpdatePlatform" type="text/html">
+    <div class="layer-div">
+        <form id="addOrUpdatePlatformForm" class="layui-form" autocomplete="off">
+            <input type="hidden" name="id" value="{{d.id}}">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>公司名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="companyName" placeholder="公司名称" lay-verify="companyName" class="layui-input" value="{{d.companyName}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系电话：</label>
+                <div class="layui-input-block">
+                    <input type="tel" name="tel" placeholder="联系电话" lay-verify="tel" class="layui-input" value="{{d.tel}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>联系地址：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="companyAddr" placeholder="联系地址" lay-verify="companyAddr" class="layui-input" value="{{d.companyAddr}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>公司网址：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="companyUrl" placeholder="公司网址" lay-verify="companyUrl" class="layui-input" value="{{d.companyUrl}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>公司二维码：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="qrcode" placeholder="公司二维码" lay-verify="qrcode" class="layui-input" value="{{d.qrcode}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>logo名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="logoName" placeholder="logo名称" lay-verify="logoName" class="layui-input" value="{{d.logoName}}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="layui-form-label-star">*</span>logo图标：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="logoUrl" placeholder="logo图标" lay-verify="logoUrl" class="layui-input" value="{{d.logoUrl}}" />
+                </div>
+            </div>
+            <div class="layui-form-item form-btn">
+                <div class="layui-inline">
+                    <button id="submits" class="layui-btn layui-btn-md" lay-submit lay-filter="addOrUpdatePlatformForm">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/javascript">
+    layui.use("sysPlatform",function(){
+        var sysPlatform = layui.sysPlatform;
+        //初始化页面
+        sysPlatform.initView();
+        //监听事件
+        sysPlatform.tool();
+    })
+</script>

@@ -12,5 +12,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-03-20
  */
 public interface ISysPlatformService extends IService<SysPlatform> {
-
+    /**
+     * 删除数据
+     * @param id
+     * @return
+     */
+    boolean updateStatusById(String id);
 }
